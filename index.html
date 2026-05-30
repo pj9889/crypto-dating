@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Crypto Reward | Unlock Your Match</title>
+    <style>
+        /* বেসিক রিসেট ও ডার্ক প্রিমিয়াম থিম */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        body { 
+            background: radial-gradient(circle at center, #111827 0%, #030712 100%); 
+            color: #f3f4f6; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        /* মেইন কার্ড কন্টেইনার (মোবাইল ও ডেক্সটপে পারফেক্ট সাইজ) */
+        .promo-card { 
+            background: rgba(17, 24, 39, 0.85); 
+            max-width: 480px; 
+            width: 100%; 
+            border-radius: 24px; 
+            padding: 40px 30px; 
+            text-align: center; 
+            border: 1px solid rgba(236, 72, 153, 0.2); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(236, 72, 153, 0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        /* ক্রিপ্টো/গিফট আইকন বা ব্যাজ */
+        .bonus-badge {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+            color: #000;
+            font-size: 12px;
+            font-weight: 900;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
+            letter-spacing: 1px;
+        }
+        
+        /* মেইন হেডিং ও কালারিং */
+        h1 {
+            font-size: 28px;
+            line-height: 1.3;
+            margin-bottom: 15px;
+            color: #ffffff;
+            font-weight: 800;
+        }
+        .highlight-gold {
+            background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .highlight-pink {
+            background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* সাব-হেডিং */
+        .sub-text {
+            font-size: 18px;
+            color: #9ca3af;
+            margin-bottom: 35px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        /* আল্ট্রা-অ্যানিমেটেড প্রিমিয়াম বাটন */
+        .btn-claim {
+            display: inline-block;
+            width: 100%;
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 50%, #f43f5e 100%);
+            color: white;
+            border: none;
+            padding: 18px 25px;
+            font-size: 20px;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 20px rgba(236, 72, 15 pink, 0.5), inset 0 -4px 0 rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            animation: pulseGlow 1.5s infinite alternate, wobbleShake 3s infinite ease-in-out;
+        }
+        
+        .btn-claim:hover {
+            background: linear-gradient(135deg, #f43f5e 0%, #ec4899 100%);
+            box-shadow: 0 0 35px rgba(236, 72, 153, 0.9);
+            transform: scale(1.05);
+        }
+
+        /* পালস (Glow & Scale) অ্যানিমেশন */
+        @keyframes pulseGlow {
+            0% { 
+                transform: scale(1); 
+                box-shadow: 0 0 15px rgba(236, 72, 153, 0.5); 
+            }
+            100% { 
+                transform: scale(1.03); 
+                box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 15px rgba(244, 63, 94, 0.4); 
+            }
+        }
+
+        /* হালকা নড়াচড়া (Wobble) অ্যানিমেশন */
+        @keyframes wobbleShake {
+            0%, 100%, 80% { transform: rotate(0deg); }
+            85% { transform: rotate(-2deg); }
+            90% { transform: rotate(2deg); }
+            95% { transform: rotate(-2deg); }
+        }
+
+        /* রেসপন্সিভ ব্রেকপয়েন্ট (ছোট মোবাইলের জন্য অপ্টিমাইজেশন) */
+        @media (max-width: 400px) {
+            h1 { font-size: 24px; }
+            .sub-text { font-size: 16px; }
+            .btn-claim { font-size: 17px; padding: 15px 20px; }
+            .promo-card { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="promo-card">
+        <div class="bonus-badge">Verified Offer</div>
+        
+        <h1>Match with Someone Right Now & Get <span class="highlight-gold">$100 Crypto</span> Instantly in Your Wallet!</h1>
+        
+        <p class="sub-text">Unlock Your Match Now!</p>
+        
+        <a href="https://paysale.g2afse.com/click?pid=125904&offer_id=10417&sub1=P1" class="btn-claim" target="_blank">
+            Unlock Match & Win $100
+        </a>
+    </div>
+
+</body>
+</html>
