@@ -26,7 +26,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* কার্ডের নিচে রাখার জন্য */
+            z-index: -1;
             overflow: hidden;
         }
         
@@ -37,9 +37,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* ডিসপ্লে যেমনই হোক ছবি পারফেক্টলি ফিট হবে */
+            object-fit: cover;
             opacity: 0;
-            transition: opacity 1s ease-in-out; /* ছবি চেঞ্জ হওয়ার সময় স্মুথ ইফেক্ট */
+            transition: opacity 1s ease-in-out;
         }
         
         /* যে ছবিটা একটিভ থাকবে তার জন্য */
@@ -47,8 +47,8 @@
             opacity: 1;
         }
 
-        /* ব্যাকগ্রাউন্ডের ছবিগুলোর উপর একটি হালকা ডার্ক লেয়ার (ওভারলে) */
-        /* এটা দেওয়া হয়েছে যাতে ব্যাকগ্রাউন্ডের ছবির কারণে সামনের লেখা পড়তে ট্রাফিকের সমস্যা না হয় */
+        /* 💡 এখানে অন্ধকার লেয়ারের অপাসিটি ০.৬৫ থেকে কমিয়ে ০.২৫ করে দেওয়া হয়েছে */
+        /* এর ফলে ব্যাকগ্রাউন্ড পিকচারগুলো এখন একদম ক্লিয়ার ও স্পষ্ট দেখা যাবে */
         .bg-slider::after {
             content: '';
             position: absolute;
@@ -56,20 +56,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.65); /* কালো আবছায়া লেয়ার */
+            background: rgba(0, 0, 0, 0.25); 
         }
         
-        /* মেইন কার্ড কন্টেইনার */
+        /* মেইন কার্ড কন্টেইনার (টেক্সট পড়ার সুবিধার জন্য এর ব্যাকগ্রাউন্ড একটু সলিড করা হয়েছে) */
         .promo-card { 
-            background: rgba(17, 24, 39, 0.85); 
+            background: rgba(10, 15, 30, 0.92); 
             max-width: 480px; 
             width: 100%; 
             border-radius: 24px; 
             padding: 40px 30px; 
             text-align: center; 
-            border: 1px solid rgba(236, 72, 153, 0.3); 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px); /* কার্ডের পিছনের অংশ হালকা ব্লার দেখাবে */
+            border: 1px solid rgba(236, 72, 153, 0.4); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
             z-index: 1;
         }
 
@@ -84,25 +84,21 @@
             border-radius: 50px;
             display: inline-block;
             margin-bottom: 20px;
-            box-shadow: 0 0 15px rgba(234, 179, 8, 0.4);
+            box-shadow: 0 0 15px rgba(234, 179, 8, 0.5);
             letter-spacing: 1px;
         }
         
-        /* মেইন হেডিং ও কালারিং (লেখা ও কালার আগের মতোই আছে) */
+        /* মেইন হেডিং ও কালারিং */
         h1 {
             font-size: 28px;
             line-height: 1.3;
             margin-bottom: 15px;
             color: #ffffff;
             font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
         .highlight-gold {
             background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .highlight-pink {
-            background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -110,10 +106,11 @@
         /* সাব-টেক্সট */
         .sub-text {
             font-size: 18px;
-            color: #d1d5db;
+            color: #e5e7eb;
             margin-bottom: 35px;
             font-weight: 500;
             letter-spacing: 0.5px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
         }
         
         /* অ্যানিমেটেড বাটন (Unlock Match) */
@@ -131,7 +128,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
             transition: all 0.3s ease;
             animation: pulseGlow 1.5s infinite alternate, wobbleShake 3s infinite ease-in-out;
         }
@@ -198,17 +195,12 @@
         const totalBgImages = bgImages.length;
 
         function autoBackgroundSlider() {
-            // বর্তমানের একটিভ ব্যাকগ্রাউন্ড থেকে ক্লাস বাদ দেওয়া
             bgImages[currentBgIndex].classList.remove('active-bg');
-            
-            // ইনডেক্স পরিবর্তন করে পরের ছবিতে যাওয়া
             currentBgIndex = (currentBgIndex + 1) % totalBgImages;
-            
-            // নতুন ছবিতে একটিভ ক্লাস যোগ করা
             bgImages[currentBgIndex].classList.add('active-bg');
         }
 
-        // প্রতি ৩০০০ মিলিসেকেন্ড (৩ সেকেন্ড) পর পর ব্যাকগ্রাউন্ড ইমেজ অটো চেঞ্জ হবে
+        // প্রতি ৩ সেকেন্ড পর পর ব্যাকগ্রাউন্ড ইমেজ অটো চেঞ্জ হবে
         setInterval(autoBackgroundSlider, 3000);
     </script>
 
