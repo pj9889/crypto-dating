@@ -57,21 +57,22 @@
             background: rgba(0, 0, 0, 0.25); 
         }
         
-        /* মেইন কার্ড কন্টেইনার */
+        /* 💡 মেইন কার্ড কন্টেইনার (বক্সের ব্যাকগ্রাউন্ড কালার পরিবর্তন করা হয়েছে) */
+        /* rgba(10, 15, 30, 0.3) ব্যবহার করায় বক্সটি এখন স্বচ্ছ দেখাবে এবং পিছনের ছবি ৭০% দৃশ্যমান হবে */
         .promo-card { 
-            background: rgba(10, 15, 30, 0.93); 
+            background: rgba(10, 15, 30, 0.3); 
             max-width: 480px; 
             width: 100%; 
             border-radius: 24px; 
             padding: 35px 25px; 
             text-align: center; 
             border: 1px solid rgba(236, 72, 153, 0.4); 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px); /* পিছনের ছবি স্পষ্ট দেখানোর জন্য ব্লার কমানো হয়েছে */
             z-index: 1;
         }
 
-        /* ভেরিফাইড অফার ব্যাজ */
+        /* ভেরিфাইড অফার ব্যাজ */
         .bonus-badge {
             background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
             color: #000;
@@ -96,7 +97,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
-        /* 💡 $100 Crypto লেখার নতুন আকর্ষণীয় আল্ট্রা-ব্রাইট গোল্ডেন নিয়ন কালার */
+        /* $100 Crypto লেখার আকর্ষণীয় আল্ট্রা-ব্রাইট গোল্ডেন নিয়ন কালার */
         .highlight-gold {
             color: #fffb00;
             font-weight: 900;
@@ -146,8 +147,8 @@
 
         /* প্রিমিয়াম কাউন্টডাউন টাইমার স্টাইল */
         .timer-container {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 14px;
             padding: 12px;
             margin-top: 5px;
@@ -264,8 +265,7 @@
         }
         setInterval(autoBackgroundSlider, 3000);
 
-        // 💡 ৪ ঘণ্টা ৩৭ মিনিটের নিখুঁত কাউন্টডাউন টাইমার জাভাস্ক্রিপ্ট কোড
-        // পেজ ওপেন হওয়া মাত্রই বর্তমান সময় থেকে ৪ ঘণ্টা ৩৭ মিনিট কাউন্টডাউন শুরু হবে
+        // ৪ ঘণ্টা ৩৭ মিনিটের নিখুঁত কাউন্টডাউন টাইমার জাভাস্ক্রিপ্ট কোড
         const totalSeconds = (4 * 60 * 60) + (37 * 60); 
         let timeRemaining = totalSeconds;
 
@@ -276,7 +276,6 @@
 
         function updateCountdown() {
             if (timeRemaining <= 0) {
-                // অফার শেষ হয়ে গেলে টাইমার জিরো হয়ে আটকে থাকবে
                 daysElement.textContent = "00";
                 hoursElement.textContent = "00";
                 minutesElement.textContent = "00";
@@ -284,13 +283,11 @@
                 return;
             }
 
-            // হিসাব নিকাশ
-            const d = 0; // আপনার রুলস অনুযায়ী দিন সবসময় 00 থাকবে
+            const d = 0;
             const h = Math.floor((timeRemaining % (24 * 3600)) / 3600);
             const m = Math.floor((timeRemaining % 3600) / 60);
             const s = Math.floor(timeRemaining % 60);
 
-            // ডিসপ্লেতে সংখ্যা বসানো (সিঙ্গেল ডিজিট হলে আগে একটা ০ বসবে)
             daysElement.textContent = "00";
             hoursElement.textContent = h < 10 ? "0" + h : h;
             minutesElement.textContent = m < 10 ? "0" + m : m;
@@ -299,9 +296,8 @@
             timeRemaining--;
         }
 
-        // প্রতি সেকেন্ডে টাইমার আপডেট হবে
         setInterval(updateCountdown, 1000);
-        updateCountdown(); // প্রথমবার ইনস্ট্যান্ট লোডের জন্য
+        updateCountdown();
     </script>
 
 </body>
