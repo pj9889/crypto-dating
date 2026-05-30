@@ -42,13 +42,11 @@
             transition: opacity 1s ease-in-out;
         }
         
-        /* যে ছবিটা একটিভ থাকবে তার জন্য */
         .bg-pic.active-bg {
             opacity: 1;
         }
 
-        /* 💡 এখানে অন্ধকার লেয়ারের অপাসিটি ০.৬৫ থেকে কমিয়ে ০.২৫ করে দেওয়া হয়েছে */
-        /* এর ফলে ব্যাকগ্রাউন্ড পিকচারগুলো এখন একদম ক্লিয়ার ও স্পষ্ট দেখা যাবে */
+        /* ব্যাকগ্রাউন্ড ক্লিয়ার রাখার জন্য হালকা ওভারলে */
         .bg-slider::after {
             content: '';
             position: absolute;
@@ -59,13 +57,13 @@
             background: rgba(0, 0, 0, 0.25); 
         }
         
-        /* মেইন কার্ড কন্টেইনার (টেক্সট পড়ার সুবিধার জন্য এর ব্যাকগ্রাউন্ড একটু সলিড করা হয়েছে) */
+        /* মেইন কার্ড কন্টেইনার */
         .promo-card { 
-            background: rgba(10, 15, 30, 0.92); 
+            background: rgba(10, 15, 30, 0.93); 
             max-width: 480px; 
             width: 100%; 
             border-radius: 24px; 
-            padding: 40px 30px; 
+            padding: 35px 25px; 
             text-align: center; 
             border: 1px solid rgba(236, 72, 153, 0.4); 
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
@@ -88,26 +86,32 @@
             letter-spacing: 1px;
         }
         
-        /* মেইন হেডিং ও কালারিং */
+        /* মেইন হেডিং */
         h1 {
-            font-size: 28px;
-            line-height: 1.3;
+            font-size: 26px;
+            line-height: 1.35;
             margin-bottom: 15px;
             color: #ffffff;
             font-weight: 800;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
+
+        /* 💡 $100 Crypto লেখার নতুন আকর্ষণীয় আল্ট্রা-ব্রাইট গোল্ডেন নিয়ন কালার */
         .highlight-gold {
-            background: linear-gradient(135deg, #facc15 0%, #f97316 100%);
+            color: #fffb00;
+            font-weight: 900;
+            text-shadow: 0 0 10px rgba(255, 251, 0, 0.65), 0 0 20px rgba(249, 115, 22, 0.4);
+            background: linear-gradient(135deg, #fffb00 0%, #ff9100 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
 
         /* সাব-টেক্সট */
         .sub-text {
             font-size: 18px;
             color: #e5e7eb;
-            margin-bottom: 35px;
+            margin-bottom: 25px;
             font-weight: 500;
             letter-spacing: 0.5px;
             text-shadow: 0 1px 3px rgba(0,0,0,0.8);
@@ -131,6 +135,7 @@
             box-shadow: 0 0 20px rgba(236, 72, 153, 0.6);
             transition: all 0.3s ease;
             animation: pulseGlow 1.5s infinite alternate, wobbleShake 3s infinite ease-in-out;
+            margin-bottom: 25px;
         }
         
         .btn-claim:hover {
@@ -139,19 +144,53 @@
             transform: scale(1.05);
         }
 
-        /* পালস (Glow & Scale) অ্যানিমেশন */
-        @keyframes pulseGlow {
-            0% { 
-                transform: scale(1); 
-                box-shadow: 0 0 15px rgba(236, 72, 153, 0.5); 
-            }
-            100% { 
-                transform: scale(1.03); 
-                box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 15px rgba(244, 63, 94, 0.4); 
-            }
+        /* প্রিমিয়াম কাউন্টডাউন টাইমার স্টাইল */
+        .timer-container {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 14px;
+            padding: 12px;
+            margin-top: 5px;
+        }
+        .timer-title {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #9ca3af;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .timer-block {
+            background: #1f2937;
+            padding: 6px 10px;
+            border-radius: 8px;
+            min-width: 55px;
+            border-bottom: 2px solid #ef4444;
+        }
+        .timer-num {
+            font-size: 18px;
+            font-weight: 800;
+            color: #ef4444;
+            font-family: monospace, sans-serif;
+        }
+        .timer-label {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: #9ca3af;
+            margin-top: 2px;
         }
 
-        /* হালকা নড়াচড়া (Wobble) অ্যানিমেশন */
+        /* অ্যানিমেশনসমূহ */
+        @keyframes pulseGlow {
+            0% { transform: scale(1); box-shadow: 0 0 15px rgba(236, 72, 153, 0.5); }
+            100% { transform: scale(1.03); box-shadow: 0 0 30px rgba(236, 72, 153, 0.8), 0 0 15px rgba(244, 63, 94, 0.4); }
+        }
+
         @keyframes wobbleShake {
             0%, 100%, 80% { transform: rotate(0deg); }
             85% { transform: rotate(-2deg); }
@@ -161,10 +200,12 @@
 
         /* রেসপন্সিভ মোবাইল অপ্টিমাইজেশন */
         @media (max-width: 400px) {
-            h1 { font-size: 24px; }
+            h1 { font-size: 22px; }
             .sub-text { font-size: 16px; }
             .btn-claim { font-size: 17px; padding: 15px 20px; }
-            .promo-card { padding: 30px 20px; }
+            .promo-card { padding: 25px 15px; }
+            .timer-block { min-width: 45px; padding: 4px 6px; }
+            .timer-num { font-size: 16px; }
         }
     </style>
 </head>
@@ -186,6 +227,28 @@
         <a href="https://paysale.g2afse.com/click?pid=125904&offer_id=10417&sub1=P1" class="btn-claim" target="_blank">
             Unlock Match & Win $100
         </a>
+
+        <div class="timer-container">
+            <div class="timer-title">Limited Time Offer Ending In</div>
+            <div class="timer-display">
+                <div class="timer-block">
+                    <div class="timer-num" id="days">00</div>
+                    <div class="timer-label">Days</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-num" id="hours">04</div>
+                    <div class="timer-label">Hours</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-num" id="minutes">37</div>
+                    <div class="timer-label">Min</div>
+                </div>
+                <div class="timer-block">
+                    <div class="timer-num" id="seconds">00</div>
+                    <div class="timer-label">Sec</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -199,9 +262,46 @@
             currentBgIndex = (currentBgIndex + 1) % totalBgImages;
             bgImages[currentBgIndex].classList.add('active-bg');
         }
-
-        // প্রতি ৩ সেকেন্ড পর পর ব্যাকগ্রাউন্ড ইমেজ অটো চেঞ্জ হবে
         setInterval(autoBackgroundSlider, 3000);
+
+        // 💡 ৪ ঘণ্টা ৩৭ মিনিটের নিখুঁত কাউন্টডাউন টাইমার জাভাস্ক্রিপ্ট কোড
+        // পেজ ওপেন হওয়া মাত্রই বর্তমান সময় থেকে ৪ ঘণ্টা ৩৭ মিনিট কাউন্টডাউন শুরু হবে
+        const totalSeconds = (4 * 60 * 60) + (37 * 60); 
+        let timeRemaining = totalSeconds;
+
+        const daysElement = document.getElementById('days');
+        const hoursElement = document.getElementById('hours');
+        const minutesElement = document.getElementById('minutes');
+        const secondsElement = document.getElementById('seconds');
+
+        function updateCountdown() {
+            if (timeRemaining <= 0) {
+                // অফার শেষ হয়ে গেলে টাইমার জিরো হয়ে আটকে থাকবে
+                daysElement.textContent = "00";
+                hoursElement.textContent = "00";
+                minutesElement.textContent = "00";
+                secondsElement.textContent = "00";
+                return;
+            }
+
+            // হিসাব নিকাশ
+            const d = 0; // আপনার রুলস অনুযায়ী দিন সবসময় 00 থাকবে
+            const h = Math.floor((timeRemaining % (24 * 3600)) / 3600);
+            const m = Math.floor((timeRemaining % 3600) / 60);
+            const s = Math.floor(timeRemaining % 60);
+
+            // ডিসপ্লেতে সংখ্যা বসানো (সিঙ্গেল ডিজিট হলে আগে একটা ০ বসবে)
+            daysElement.textContent = "00";
+            hoursElement.textContent = h < 10 ? "0" + h : h;
+            minutesElement.textContent = m < 10 ? "0" + m : m;
+            secondsElement.textContent = s < 10 ? "0" + s : s;
+
+            timeRemaining--;
+        }
+
+        // প্রতি সেকেন্ডে টাইমার আপডেট হবে
+        setInterval(updateCountdown, 1000);
+        updateCountdown(); // প্রথমবার ইনস্ট্যান্ট লোডের জন্য
     </script>
 
 </body>
