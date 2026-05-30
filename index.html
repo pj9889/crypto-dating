@@ -5,20 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claim Your Crypto Reward | Unlock Your Match</title>
     <style>
-        /* বেসিক রিসেট ও ডার্ক প্রিমিয়াম থিম */
+        /* বেসিক রিসেট ও ফুল স্ক্রিন সেটআপ */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        
         body { 
-            background: radial-gradient(circle at center, #111827 0%, #030712 100%); 
             color: #f3f4f6; 
             display: flex; 
             justify-content: center; 
             align-items: center; 
             min-height: 100vh; 
             padding: 20px;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
         }
         
-        /* মেইন কার্ড কন্টেইনার (মোবাইল ও ডেক্সটপে পারফেক্ট সাইজ) */
+        /* ফুল স্ক্রিন ব্যাকগ্রাউন্ড স্লাইডশো এরিয়া */
+        .bg-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* কার্ডের নিচে রাখার জন্য */
+            overflow: hidden;
+        }
+        
+        /* ব্যাকগ্রাউন্ড ইমেজের স্টাইল */
+        .bg-pic {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ডিসপ্লে যেমনই হোক ছবি পারফেক্টলি ফিট হবে */
+            opacity: 0;
+            transition: opacity 1s ease-in-out; /* ছবি চেঞ্জ হওয়ার সময় স্মুথ ইফেক্ট */
+        }
+        
+        /* যে ছবিটা একটিভ থাকবে তার জন্য */
+        .bg-pic.active-bg {
+            opacity: 1;
+        }
+
+        /* ব্যাকগ্রাউন্ডের ছবিগুলোর উপর একটি হালকা ডার্ক লেয়ার (ওভারলে) */
+        /* এটা দেওয়া হয়েছে যাতে ব্যাকগ্রাউন্ডের ছবির কারণে সামনের লেখা পড়তে ট্রাফিকের সমস্যা না হয় */
+        .bg-slider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.65); /* কালো আবছায়া লেয়ার */
+        }
+        
+        /* মেইন কার্ড কন্টেইনার */
         .promo-card { 
             background: rgba(17, 24, 39, 0.85); 
             max-width: 480px; 
@@ -26,13 +67,13 @@
             border-radius: 24px; 
             padding: 40px 30px; 
             text-align: center; 
-            border: 1px solid rgba(236, 72, 153, 0.2); 
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(236, 72, 153, 0.1);
-            backdrop-filter: blur(10px);
-            position: relative;
+            border: 1px solid rgba(236, 72, 153, 0.3); 
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px); /* কার্ডের পিছনের অংশ হালকা ব্লার দেখাবে */
+            z-index: 1;
         }
 
-        /* ক্রিপ্টো/গিফট আইকন বা ব্যাজ */
+        /* ভেরিফাইড অফার ব্যাজ */
         .bonus-badge {
             background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
             color: #000;
@@ -47,7 +88,7 @@
             letter-spacing: 1px;
         }
         
-        /* মেইন হেডিং ও কালারিং */
+        /* মেইন হেডিং ও কালারিং (লেখা ও কালার আগের মতোই আছে) */
         h1 {
             font-size: 28px;
             line-height: 1.3;
@@ -66,16 +107,16 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* সাব-হেডিং */
+        /* সাব-টেক্সট */
         .sub-text {
             font-size: 18px;
-            color: #9ca3af;
+            color: #d1d5db;
             margin-bottom: 35px;
             font-weight: 500;
             letter-spacing: 0.5px;
         }
         
-        /* আল্ট্রা-অ্যানিমেটেড প্রিমিয়াম বাটন */
+        /* অ্যানিমেটেড বাটন (Unlock Match) */
         .btn-claim {
             display: inline-block;
             width: 100%;
@@ -90,7 +131,7 @@
             text-decoration: none;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 20px rgba(236, 72, 15 pink, 0.5), inset 0 -4px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
             transition: all 0.3s ease;
             animation: pulseGlow 1.5s infinite alternate, wobbleShake 3s infinite ease-in-out;
         }
@@ -121,7 +162,7 @@
             95% { transform: rotate(-2deg); }
         }
 
-        /* রেসপন্সিভ ব্রেকপয়েন্ট (ছোট মোবাইলের জন্য অপ্টিমাইজেশন) */
+        /* রেসপন্সিভ মোবাইল অপ্টিমাইজেশন */
         @media (max-width: 400px) {
             h1 { font-size: 24px; }
             .sub-text { font-size: 16px; }
@@ -131,6 +172,12 @@
     </style>
 </head>
 <body>
+
+    <div class="bg-slider">
+        <img src="cx1.webp" alt="Background 1" class="bg-pic active-bg">
+        <img src="cx2.webp" alt="Background 2" class="bg-pic">
+        <img src="cx3.webp" alt="Background 3" class="bg-pic">
+    </div>
 
     <div class="promo-card">
         <div class="bonus-badge">Verified Offer</div>
@@ -143,6 +190,27 @@
             Unlock Match & Win $100
         </a>
     </div>
+
+    <script>
+        // ব্যাকগ্রাউন্ড ইমেজ অনবরত চেঞ্জ করার জাভাস্ক্রিপ্ট কোড
+        let currentBgIndex = 0;
+        const bgImages = document.querySelectorAll('.bg-pic');
+        const totalBgImages = bgImages.length;
+
+        function autoBackgroundSlider() {
+            // বর্তমানের একটিভ ব্যাকগ্রাউন্ড থেকে ক্লাস বাদ দেওয়া
+            bgImages[currentBgIndex].classList.remove('active-bg');
+            
+            // ইনডেক্স পরিবর্তন করে পরের ছবিতে যাওয়া
+            currentBgIndex = (currentBgIndex + 1) % totalBgImages;
+            
+            // নতুন ছবিতে একটিভ ক্লাস যোগ করা
+            bgImages[currentBgIndex].classList.add('active-bg');
+        }
+
+        // প্রতি ৩০০০ মিলিসেকেন্ড (৩ সেকেন্ড) পর পর ব্যাকগ্রাউন্ড ইমেজ অটো চেঞ্জ হবে
+        setInterval(autoBackgroundSlider, 3000);
+    </script>
 
 </body>
 </html>
